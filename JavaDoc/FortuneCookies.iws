@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="FortuneCookies:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9788de6b-37e8-452a-84ff-07a04457b759" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="328" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>nussbaum</find>
+      <find>;[</find>
+      <find>&amp;aacute;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>.</replace>
+      <replace>[</replace>
+      <replace>í</replace>
+      <replace>á</replace>
+    </replaceStrings>
+  </component>
+  <component name="ProjectId" id="1ShJKLIal08TTYh9kBGwX2DfvXR" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propGUI" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/JavaDoc" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/fortuneCookies" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="fortuneCookies" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.FortuneCookies">
+    <configuration name="FortuneCookies" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fortuneCookies.FortuneCookies" />
+      <module name="FortuneCookies" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fortuneCookies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ListArrayTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fortuneCookies.ListArrayTest" />
+      <module name="FortuneCookies" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fortuneCookies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RandomCookieChooser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fortuneCookies.RandomCookieChooser" />
+      <module name="FortuneCookies" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fortuneCookies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadLines" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fortuneCookies.ReadLines" />
+      <module name="FortuneCookies" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fortuneCookies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Fortune_Cookies.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Fortune_Cookies_jar/Fortune_Cookies.jar" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.FortuneCookies" />
+        <item itemvalue="JAR Application.Fortune_Cookies.jar" />
+        <item itemvalue="Application.RandomCookieChooser" />
+        <item itemvalue="Application.ReadLines" />
+        <item itemvalue="Application.ListArrayTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9788de6b-37e8-452a-84ff-07a04457b759" name="Default Changelist" comment="" />
+      <created>1571398325615</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1571398325615</updated>
+      <workItem from="1571398326855" duration="1420000" />
+      <workItem from="1571400059428" duration="3540000" />
+      <workItem from="1571453327672" duration="1139000" />
+      <workItem from="1571517253935" duration="4647000" />
+      <workItem from="1571583452489" duration="1097000" />
+      <workItem from="1571586282275" duration="1630000" />
+      <workItem from="1571625759188" duration="57000" />
+      <workItem from="1571791825057" duration="3286000" />
+      <workItem from="1571801999851" duration="273000" />
+      <workItem from="1571829568748" duration="12988000" />
+      <workItem from="1572009829812" duration="6705000" />
+      <workItem from="1572038471740" duration="1178000" />
+      <workItem from="1572039800322" duration="533000" />
+      <workItem from="1572043410281" duration="1545000" />
+      <workItem from="1572103456490" duration="1095000" />
+      <workItem from="1572120111569" duration="3071000" />
+      <workItem from="1572123742238" duration="225000" />
+      <workItem from="1572123978252" duration="1576000" />
+      <workItem from="1572126107495" duration="48000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/fortuneCookies/FCDialog.java</url>
+          <line>80</line>
+          <properties method="actionPerformed">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/FortuneCookies$Scratch.ic" NAME="Scratch Coverage Results" MODIFIED="1571545239283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>byteArray</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+</project>

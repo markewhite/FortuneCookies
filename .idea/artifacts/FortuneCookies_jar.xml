@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FortuneCookies:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FortuneCookies_jar</output-path>
+    <root id="archive" name="FortuneCookies.jar">
+      <element id="module-output" name="FortuneCookies" />
+    </root>
+  </artifact>
+</component>

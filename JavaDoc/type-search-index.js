@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"fortuneCookies","l":"FCDialog"},{"p":"fortuneCookies","l":"FortuneCookies"}]
