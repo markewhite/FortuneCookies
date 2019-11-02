@@ -1,13 +1,17 @@
 package fortuneCookies;
 
 
+// TODO: 11/2/19  Put in editor pane
 
 
-//package rightSize;
+import jdk.dynalink.beans.StaticClass;
 
-
+import javax.print.attribute.standard.MediaSize;
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthListUI;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,88 +25,69 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-/*import cap.CapDoc;
-import cluster.ClusterDoc;
-import sRS.SRSDoc;
-import tutorials.TutDoc;
-*/
-
-
-//TODO Move sRS view stuff to bases
-
-//TODO Add view stuff to cluster
-
 
 
 /**
+ * UI is adapted from the tried and true RightSize 30.2 program.
+ * It's modified to contain the guts of the FortuneCookie program, which select a random quote from a file, appends
+ * it to an address, and then copies the result to the System clipboard. The user pastes it at the appropriate place
+ * in thier email text.
  *
  *  @author  Mark White <mark@markewhite.com> <markewhite@icloud.com>
- *  @version 30.2
+ *  @version 1.3
  *  <p
- *Originally written in around 1990, RightSize was written in Microsoft C for MSDOS. I updated
- * it to Microsoft Visual C++ when this became available. In the early 2000's, I rewrote it
- * in Java for maximum portability.
- *  <p>
- *
- * This class contains the main class of RightSize, a teaching tool for survey statistics for
- * Field Epidemiology Training Program fellows.
- * </p>
- *
- * <p>
- * RightSize is the main user interface class. It extends JFrame and contains a JDesktopPane that contains the
- * main UI, including a menu, about, and tutorials. The menu calls the appropriate classes to gather user
- * information, calculate results, and display them graphically.
- *</p>
- *
- *<p>
- *     It uses the document-view model, where the document contains data and does calculations and the view deals
- *     with the user and shows results.
- *</p>
- *
- */
+ * fyi:
+*/
 public class FortuneCookies extends JFrame implements ActionListener
 {
-    static final String signature = "Mark White\nphone 001-404-735-7547\nmark@markewhite.com";
+    final String signature = "Mark White\nphone 001-404-735-7547\nmark@markewhite.com";
     private static ArrayList<String> cookieList = new ArrayList<String>();
     String line;
     static String cookie;
     private static final long serialVersionUID = 1L;
-    private JDesktopPane desktop = null;
-/*    private sRS.SRSDoc SRSDoc =null;
-    private ClusterDoc clusterDoc = null;
-    private CapDoc capDoc= null;
-    private TutDoc tutDoc = null;
-*/    //private AboutMenu tutDoc = null;
+   // private JDesktopPane desktop = null;
+   JPanel contentPane = new JPanel();
+   static JPanel buttonPanel;
+   static JTextPane textPane;
 
-    /*private RSChartDoc chartDoc = null;
-2014*/
+
+    /**
+     * Constructor
+     */
     public FortuneCookies()
     {
-        super("Dedicated to Dionisio Herrera, visionary leader of TEPHINET.");
+        super("FortuneCookie Cookie Chooser");
+        setLayout(new BorderLayout());
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout());
+
+        textPane = new JTextPane(); // Make sure this is created before we write to it.
 
 
 
-        // Make the big window be indented 50 pixels from each edge
+        // Set the frame to be wide and take up the top third of screen.
         // of the screen.
-        int inset = 50;
+        int inset = 100;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds(inset, inset, screenSize.width - inset * 2,
-                screenSize.height - inset * 2);
+        this.setBounds(inset, inset, screenSize.width/2 - inset,
+                screenSize.height/3 - inset);
 
-        // Set up the GUI.
-        ////     desktop = new JDesktopPane(); // a specialized layered pane
-        JPanel panel = new JPanel();
-        // createFrame(); //create first "window"
-        setContentPane(panel);
-///			SRSDoc = new SRSDoc(desktop);
+
+
         setJMenuBar(createMenuBar());
 
-        // Make dragging a little faster but perhaps uglier.
-////        desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
+        textPane.setText("eat Me!");
+        add(textPane, BorderLayout.NORTH);
+        createButtonPanel();
+        add(buttonPanel, BorderLayout.SOUTH);
+
 
         Charset charset=Charset.forName("UTF-8");
         Path path = Paths.get("/Users/mark/Desktop/Java/FortuneCookies/src/fortuneCookies/FortuneCoookies.txt");
-    String line = "";
+
+
+
+
         // Create cookieList
         try (
                 BufferedReader reader=Files.newBufferedReader(path, charset))
@@ -125,7 +110,9 @@ public class FortuneCookies extends JFrame implements ActionListener
 
             //   System.out.println("numLines is " + numLines + '\n');
 
-            cookie = getRandomLine();
+            cookie = getRandomLine(); //Put new aphorism into the active cookie where it can be copied to the System
+            // clipboard as needed.
+            textPane.setText(cookie); // Put it in the textPanel and show.
         }
 
         catch (
@@ -137,6 +124,53 @@ public class FortuneCookies extends JFrame implements ActionListener
     }
 
 
+    static String getRandomLine()
+    {
+        Random rn = new Random();
+        int lineNumber = rn.nextInt(cookieList.size());
+
+
+
+
+        return cookieList.get(lineNumber);
+    }
+
+
+    private JPanel createButtonPanel()
+    {
+        // Created panel
+        buttonPanel = new JPanel();
+
+        // Create and add buttons
+        JButton buttonCopy = new JButton("Copy");
+
+        buttonCopy.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                OnCopy();
+            }
+        });
+
+ /**       JButton buttonQuit = new JButton("Quit");
+        buttonQuit.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                onQuit();
+            }
+        });
+
+*/
+
+        buttonPanel.add(buttonCopy);
+
+
+
+        return buttonPanel;
+    }
+
+
 
 
     protected JMenuBar createMenuBar()
@@ -144,9 +178,9 @@ public class FortuneCookies extends JFrame implements ActionListener
         JMenuBar menuBar = new JMenuBar();
 
         // Set up the lone menu.
-        JMenu menu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
         //menu.setMnemonic(KeyEvent.VK_D);
-        menuBar.add(menu);
+        menuBar.add(fileMenu);
 
         // Set up the first menu item.
         /*
@@ -169,59 +203,22 @@ public class FortuneCookies extends JFrame implements ActionListener
         //⌘        KeyEvent.VK_Q, ActionEvent.ALT_MASK));
         fileExitMenuItem.setActionCommand("quit");
         fileExitMenuItem.addActionListener(this);
-        menu.add(fileExitMenuItem);
+        fileMenu.add(fileExitMenuItem);
 
-
-     /*   fileExitMenuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_Q, ActionEvent.ALT_MASK));
-        fileExitMenuItem.setActionCommand("quit");
-        fileExitMenuItem.addActionListener(this);
-        menu.add(fileExitMenuItem);
-
-      */
-
-        JMenu sampleSizeMenu = new JMenu("Calculate Sample Sizes");
-        menuBar.add(sampleSizeMenu);
-
-        JMenuItem srsMI = new JMenuItem("Simple Random Sample");
-        srsMI.setActionCommand("srs");
-        srsMI.addActionListener(this);
-        sampleSizeMenu.add(srsMI);
-
-        JMenuItem clusterMI = new JMenuItem("Cluster Sample");
-        clusterMI.setActionCommand("cluster");
-        clusterMI.addActionListener(this);
-        sampleSizeMenu.add(clusterMI);
-
-        JMenuItem capMI = new JMenuItem("Capture-Recapture Calculation");
-        capMI.setActionCommand("cap");
-        capMI.addActionListener(this);
-
-        sampleSizeMenu.add(capMI);
-
-        JMenu aboutMenu = new JMenu("About This Program");
-        menuBar.add(aboutMenu);
+//       fileMenu.add(aboutMI);
 
         JMenuItem aboutMI = new JMenuItem("About This Program");
         aboutMI.setActionCommand("aboutProgram");
         aboutMI.addActionListener(this);
-        aboutMenu.add(aboutMI);
+        fileMenu.add(aboutMI);
 
-        JMenuItem supportersMI = new JMenuItem("Supporters and Contributors");
-        supportersMI.setActionCommand("supporters");
-        supportersMI.addActionListener(this);
-        aboutMenu.add(supportersMI);
 
-        JMenuItem tutorialsMI = new JMenuItem("Tutorials");
-        tutorialsMI.setActionCommand("tutorials");
-        tutorialsMI.addActionListener(this);
-        menuBar.add(tutorialsMI);
 
-        //menu.setMnemonic(KeyEvent.VK_D);
-        //menuBar.add(aboutMenu);
 
         return menuBar;
     }
+
+
 
 
 
@@ -229,69 +226,20 @@ public class FortuneCookies extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
 
-        if ("cap".equals(e.getActionCommand()))
-        {
-//            capDoc = new CapDoc(desktop);
-            // D.b("RightSize: Reached RS menu CapDoc.");
-        }
-        else if ("quit".equals(e.getActionCommand()))
-        {
+         if ("quit".equals(e.getActionCommand()))
+         {
             quit();
-        } else if ("cluster".equals(e.getActionCommand()))
-        {
-            //           clusterDoc = new ClusterDoc(desktop);
-        } else if ("srs".equals(e.getActionCommand()))
-        {
-            //       SRSDoc = new SRSDoc(desktop);
-
         }
-        else if ("tutorials".equals(e.getActionCommand()))
-        {
-            //           tutDoc = new TutDoc(desktop);
-        }
-        else if ("srs".equals(e.getActionCommand()))
-        {
-            //           SRSDoc = new SRSDoc(desktop);
+         else if ("aboutProgram".equals(e.getActionCommand())) {
+            String text="This program produces a signature and chooses a random quote appended below it. This " +
+                    "string is added to the system clipboard. Users need only place the cursor on in the text of the " +
+                    "email " + "and insert the signture." + "\n\nWritten by Mark White, mark@markewhite.com\n\n" +
+                    "It is distributed under the GNU Public License. Code is on GitHub at https://github.com/markewhite/FortuneCookies";
 
-        }
-        else if ("aboutProgram".equals(e.getActionCommand()))
-        {
-            String text = "This program is dedicated to Dionisio Herrera, TEPHINET director for many years—and all " +
-                    "the FETP trainees and staff, present and past who need to" +
-                    " learn to " +
-                    "do accurate surveys. I hope this helps you learn to design\nfine surveys that help you improve the health of your population.\n\nWritten by Mark White";
-
-            JOptionPane.showMessageDialog(null, text, "Rightsize 30.2 is not finished as of July 1, 2019.", JOptionPane
+            JOptionPane.showMessageDialog(null, text, "Fortune Cookie Chooser.", JOptionPane
                     .PLAIN_MESSAGE, null);
 
 
-        } else if ("supporters".equals(e.getActionCommand()))
-        {
-            String text =
-                    "This program is dedicated to Dionisio Herrera, TEPHINET director for many years. RightSize is brought to you by TEPHINET, which provided moral and " +
-                            "financial support. Many FETPs and their trainees provided input and provided helpful suggestions and advice. WHO and the US CDC provided technical assistance.\n\n" +
-                            "Many people contributed thier expertise and pateince to testing and helping design the " +
-                            "screens, especially Conchy Roces, Conky Lim-Quizon, and Vikki Delosreyes." +
-                            "\n\nI'd also like to acknowledge the help of Li Vu Anh and the Vietnamese " +
-                            "trainee who calculated along with the my presentation program and found an error.\n\n" +
-                            "Thanks to Dr. Guang Zeng and the China FETP trainees who asked to be able to calculate " +
-                            "with large populations. They will be pleased to know the program can handle populations of more than 10 to " +
-                            "The 80th power. That's the estimated number of atoms in the universe.\n\n" +
-                            "You can enter very large numbers in scientific format, such as 10.80e\n\n They also " +
-                            "asked for Capture-Recapture surveys and they are included in this version.\n\n "+
-
-                            "The Philippine FETP requested Lot Quality Assurance Surveys(LQAS) will be " +
-                            "included in the next draft. Thanks to Peter Smith of the London School of " +
-                            "Hygiene and Tropical Medicine, who derived the formulat for LQAS surveys" +
-                            "from the binomial curve on the blackboard during my class at Makerere " +
-                            "School of Public Health in Kampala, Uganda\n\n" +
-
-                            "Speical thanks for my old mentor, Andy Dean, who inspired me to write programs back in " +
-                            "the 1970s.";
-
-
-            JOptionPane.showMessageDialog(null, text, "Rightsize 30.2 is not finished as of July 1, 2019.", JOptionPane
-                    .PLAIN_MESSAGE, null);
         }
     }
 
@@ -318,16 +266,10 @@ public class FortuneCookies extends JFrame implements ActionListener
 
 
 
-     static String getRandomLine()
-     {
-     Random rn = new Random();
-     int lineNumber = rn.nextInt(cookieList.size());
 
 
 
 
-     return cookieList.get(lineNumber);
-     }
 
 
 
@@ -365,100 +307,23 @@ public class FortuneCookies extends JFrame implements ActionListener
 
     }
 
-}
 
-
-
-
-
-
-/**
- *
-
-
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-/*import java.awt.Component;
-import javax.swing.*;
-import javax.swing.JMenuBar;
-import java.awt.*;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-*/
-
-/**
- * Selects a random quote from a text file and copies it to the system clipboard.
- * Class must be static so orther classes in the project can refer to teh string
- * containing the signature (address and phone number) and the member getRandomLine().
- *
- */
-
-/*public class FortuneCookies
-{
-    static final String signature = "Mark White\nphone 001-404-735-7547\nmark@markewhite.com";
-    static private List<String> cookieList = new ArrayList<String>();
-    String line;
-    static String cookie;
-
-    static JMenuBar menuBar = new JMenuBar();
-
-
-    FortuneCookies()
+    /**
+     * Copies signature and selected quote to sytem clipboard.
+     */
+    private void OnCopy()
     {
+        String sigCookie=signature + "\n\n" + cookie;
 
-      // JFrame frame = new (JFrame) SwingUtilities.getRoot();
+        // Copy to System Clipboard
 
+        Clipboard cb=Toolkit.getDefaultToolkit().getSystemClipboard(); //Get access to System clipboard.
 
+        StringSelection sigCookieSelection=new StringSelection(sigCookie); // Wrap current cookie for transport there.
 
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-
-        public static void main (String[]args)
-        {
-
-            FortuneCookies fortuneCookies = new FortuneCookies();
-
-
-            fortuneCookies.FCDialog dialog = new fortuneCookies.FCDialog(signature, cookie);
-            dialog.pack();
-            dialog.setVisible(true);
-
-            System.exit(0);
-
-        }
+        cb.setContents(sigCookieSelection, null); // copy to clipboard
     }
-    ***/
 
-
-
-
+}
 
 

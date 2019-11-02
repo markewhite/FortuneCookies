@@ -103,7 +103,7 @@ public class FCDialog extends JDialog
         cb.setContents(sigCookieSelection, null); // copy to clipboard
     }
 
-    // Eat Me!
+
     private void onQuit()
     {
         // add your code here if necessary
