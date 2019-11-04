@@ -1,14 +1,8 @@
 package fortuneCookies;
 
 
-// TODO: 11/2/19  Put in editor pane
-
-
-import jdk.dynalink.beans.StaticClass;
-
-import javax.print.attribute.standard.MediaSize;
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthListUI;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -24,9 +18,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-
-
 /**
  * UI is adapted from the tried and true RightSize 30.2 program.
  * It's modified to contain the guts of the FortuneCookie program, which select a random quote from a file, appends
@@ -37,7 +28,8 @@ import java.util.Random;
  *  @version 1.3
  *  <p
  * fyi:
-*/
+ */
+
 public class FortuneCookies extends JFrame implements ActionListener
 {
     final String signature = "Mark White\nphone 001-404-735-7547\nmark@markewhite.com";
@@ -45,10 +37,9 @@ public class FortuneCookies extends JFrame implements ActionListener
     String line;
     static String cookie;
     private static final long serialVersionUID = 1L;
-   // private JDesktopPane desktop = null;
-   JPanel contentPane = new JPanel();
-   static JPanel buttonPanel;
-   static JTextPane textPane;
+    JPanel contentPane = new JPanel();
+    static JPanel buttonPanel;
+    static JTextPane textPane;
 
 
     /**
@@ -56,12 +47,11 @@ public class FortuneCookies extends JFrame implements ActionListener
      */
     public FortuneCookies()
     {
-        super("FortuneCookie Cookie Chooser");
+        super("Fortune Cookie Chooser");
         setLayout(new BorderLayout());
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
 
-        textPane = new JTextPane(); // Make sure this is created before we write to it.
 
 
 
@@ -76,7 +66,16 @@ public class FortuneCookies extends JFrame implements ActionListener
 
         setJMenuBar(createMenuBar());
 
-        textPane.setText("eat Me!");
+        //Create text pane and add style
+        textPane = new JTextPane(); // Make sure this is created before we write to it
+        Font font = new Font("Arial", Font.PLAIN, 18);
+        textPane.setFont(font);
+    //    textPane.setText("Overwrite Me.");
+
+
+
+
+
         add(textPane, BorderLayout.NORTH);
         createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
@@ -138,7 +137,7 @@ public class FortuneCookies extends JFrame implements ActionListener
 
     private JPanel createButtonPanel()
     {
-        // Created panel
+        // Create panel and assign to class-level reference
         buttonPanel = new JPanel();
 
         // Create and add buttons
@@ -148,24 +147,20 @@ public class FortuneCookies extends JFrame implements ActionListener
         {
             public void actionPerformed(ActionEvent e)
             {
-                OnCopy();
+                onCopy();
             }
         });
-
- /**       JButton buttonQuit = new JButton("Quit");
-        buttonQuit.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                onQuit();
-            }
-        });
-
-*/
-
         buttonPanel.add(buttonCopy);
 
-
+        JButton buttonQuit = new JButton("Quit");
+         buttonQuit.addActionListener(new ActionListener()
+         {
+         public void actionPerformed(ActionEvent e)
+         {
+            onQuit();
+         }
+         });
+        buttonPanel.add(buttonQuit);
 
         return buttonPanel;
     }
@@ -183,54 +178,32 @@ public class FortuneCookies extends JFrame implements ActionListener
         menuBar.add(fileMenu);
 
         // Set up the first menu item.
-        /*
-         * JMenuItem menuItem = new JMenuItem("New");
-         * menuItem.setMnemonic(KeyEvent.VK_N);
-         * menuItem.setAccelerator(KeyStroke.getKeyStroke( KeyEvent.VK_N,
-         * ActionEvent.ALT_MASK)); menuItem.setActionCommand("new");
-         * menuItem.addActionListener(this); menu.add(menuItem);
-         */
-        // Set up the second menu item.
-
-      //  KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask
-        //  ());
-      //  fileExitMenuItem.setMnemonic(KeyEvent.stroke);
 
         JMenuItem fileExitMenuItem = new JMenuItem("Exit");
         fileExitMenuItem = new JMenuItem("Quit  ⌘Q");
         fileExitMenuItem.setMnemonic(KeyEvent.VK_Q);
-      //  fileExitMenuItem.setAccelerator(KeyStroke.getKeyStroke(
-        //⌘        KeyEvent.VK_Q, ActionEvent.ALT_MASK));
         fileExitMenuItem.setActionCommand("quit");
         fileExitMenuItem.addActionListener(this);
         fileMenu.add(fileExitMenuItem);
-
-//       fileMenu.add(aboutMI);
 
         JMenuItem aboutMI = new JMenuItem("About This Program");
         aboutMI.setActionCommand("aboutProgram");
         aboutMI.addActionListener(this);
         fileMenu.add(aboutMI);
 
-
-
-
         return menuBar;
     }
-
-
-
 
 
     // React to menu selections.
     public void actionPerformed(ActionEvent e)
     {
 
-         if ("quit".equals(e.getActionCommand()))
-         {
+        if ("quit".equals(e.getActionCommand()))
+        {
             quit();
         }
-         else if ("aboutProgram".equals(e.getActionCommand())) {
+        else if ("aboutProgram".equals(e.getActionCommand())) {
             String text="This program produces a signature and chooses a random quote appended below it. This " +
                     "string is added to the system clipboard. Users need only place the cursor on in the text of the " +
                     "email " + "and insert the signture." + "\n\nWritten by Mark White, mark@markewhite.com\n\n" +
@@ -250,28 +223,6 @@ public class FortuneCookies extends JFrame implements ActionListener
         System.exit(0);
 
     }
-
-    /**
-     * reads a file, counts the lines, and selects a line at random. If the line is blank, it chooses a new random
-     * number until a populated line is found.
-     *
-     * Pseudocode:
-     * Read file, load lines of text to StringArrayList, choose one at random, then pass to dialog. If user chooses to
-     * use the line, put slug of address, then copy this and line to system. User then presses cmd-v to insert signature
-     * to mail file.
-     *
-     */
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -308,10 +259,9 @@ public class FortuneCookies extends JFrame implements ActionListener
     }
 
 
-    /**
-     * Copies signature and selected quote to sytem clipboard.
-     */
-    private void OnCopy()
+    /*** Responses to Button Commands ***/
+
+    private void onCopy()
     {
         String sigCookie=signature + "\n\n" + cookie;
 
@@ -322,6 +272,11 @@ public class FortuneCookies extends JFrame implements ActionListener
         StringSelection sigCookieSelection=new StringSelection(sigCookie); // Wrap current cookie for transport there.
 
         cb.setContents(sigCookieSelection, null); // copy to clipboard
+    }
+
+    private void onQuit()
+    {
+        System.exit(0);
     }
 
 }
