@@ -2,7 +2,6 @@ package fortuneCookies;
 
 
 import javax.swing.*;
-import javax.swing.text.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -35,7 +34,7 @@ public class FortuneCookies extends JFrame implements ActionListener
     final String signature = "Mark White\nphone 001-404-735-7547\nmark@markewhite.com";
     private static ArrayList<String> cookieList = new ArrayList<String>();
     String line;
-    static String cookie;
+    private static String currrentCookie;
     private static final long serialVersionUID = 1L;
     JPanel contentPane = new JPanel();
     static JPanel buttonPanel;
@@ -107,11 +106,10 @@ public class FortuneCookies extends JFrame implements ActionListener
 
 
 
-            //   System.out.println("numLines is " + numLines + '\n');
 
-            cookie = getRandomLine(); //Put new aphorism into the active cookie where it can be copied to the System
+            currrentCookie= getRandomLine(); //Put new aphorism into the active cookie where it can be copied to the System
             // clipboard as needed.
-            textPane.setText(cookie); // Put it in the textPanel and show.
+            textPane.setText(currrentCookie); // Put it in the textPanel and show.
         }
 
         catch (
@@ -134,6 +132,13 @@ public class FortuneCookies extends JFrame implements ActionListener
         return cookieList.get(lineNumber);
     }
 
+    private void getCurrentCookie()
+    {
+        currrentCookie= getRandomLine(); //Put new aphorism into the active cookie where it can be copied to the System
+        // clipboard as needed.
+        textPane.setText(currrentCookie); // Put it in the textPanel and show.
+    }
+
 
     private JPanel createButtonPanel()
     {
@@ -151,6 +156,17 @@ public class FortuneCookies extends JFrame implements ActionListener
             }
         });
         buttonPanel.add(buttonCopy);
+
+        JButton buttonNext = new JButton("Next");
+
+        buttonNext.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                onNext();
+            }
+        });
+        buttonPanel.add(buttonNext);
 
         JButton buttonQuit = new JButton("Quit");
          buttonQuit.addActionListener(new ActionListener()
@@ -263,7 +279,7 @@ public class FortuneCookies extends JFrame implements ActionListener
 
     private void onCopy()
     {
-        String sigCookie=signature + "\n\n" + cookie;
+        String sigCookie=signature + "\n\n" + currrentCookie;
 
         // Copy to System Clipboard
 
@@ -272,6 +288,14 @@ public class FortuneCookies extends JFrame implements ActionListener
         StringSelection sigCookieSelection=new StringSelection(sigCookie); // Wrap current cookie for transport there.
 
         cb.setContents(sigCookieSelection, null); // copy to clipboard
+    }
+
+
+    private void onNext()
+    {
+        currrentCookie= getRandomLine(); //Put new aphorism into the active cookie where it can be copied to the System
+        // clipboard as needed.
+        textPane.setText(currrentCookie); // Put it in the textPanel and show.
     }
 
     private void onQuit()
